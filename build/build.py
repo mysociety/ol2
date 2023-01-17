@@ -107,6 +107,7 @@ def build(config_file = None, output_file = None, options = None):
                 "--externs", "closure-compiler/Externs.js",
                 "--jscomp_warning", "checkVars",   # To enable "undefinedVars"
                 "--jscomp_error",   "checkRegExp", # Also necessary to enable "undefinedVars"
+                "--language_out", "ECMASCRIPT_2020",
                 "--jscomp_error",   "undefinedVars"
             ]
         ).decode()

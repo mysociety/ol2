@@ -25,10 +25,11 @@ import subprocess
 # command's output format.
 _VERSION_REGEX = re.compile('"([0-9][.0-9]*)')
 
+JAVA_PATH = '/opt/homebrew/opt/openjdk/libexec/openjdk.jdk/Contents/Home/bin/' + 'java'
 
 def _GetJavaVersion():
   """Returns the string for the current version of Java installed."""
-  proc = subprocess.Popen(['java', '-version'], stderr=subprocess.PIPE)
+  proc = subprocess.Popen([JAVA_PATH, '-version'], stderr=subprocess.PIPE)
   unused_stdoutdata, stderrdata = proc.communicate()
   version_line = stderrdata.splitlines()[0]
   return _VERSION_REGEX.search(version_line.decode()).group(1)
@@ -53,7 +54,7 @@ def Compile(compiler_jar_path, source_paths, flags=None):
                   'Please visit http://www.java.com/getjava')
     return
 
-  args = ['java', '-jar', compiler_jar_path]
+  args = [JAVA_PATH, '-jar', compiler_jar_path]
   for path in source_paths:
     args += ['--js', path]
 
