@@ -184,7 +184,7 @@ def run (sourceDirectory, outputFilename = None, configFile = None,
     for filepath in allFiles:
         print("Importing: %s" % filepath)
         fullpath = os.path.join(sourceDirectory, filepath).strip()
-        content = open(fullpath, "U").read() # TODO: Ensure end of line @ EOF?
+        content = open(fullpath).read() # TODO: Ensure end of line @ EOF?
         files[filepath] = SourceFile(filepath, content, cfg.exclude) # TODO: Chop path?
 
     print()
@@ -208,7 +208,7 @@ def run (sourceDirectory, outputFilename = None, configFile = None,
                     fullpath = os.path.join(sourceDirectory, path).strip()
                     if os.path.exists(fullpath):
                         print("Importing: %s" % path)
-                        content = open(fullpath, "U").read() # TODO: Ensure end of line @ EOF?
+                        content = open(fullpath).read() # TODO: Ensure end of line @ EOF?
                         files[path] = SourceFile(path, content, cfg.exclude) # TODO: Chop path?
                     else:
                         raise MissingImport("File '%s' not found (required by '%s')." % (path, filepath))
