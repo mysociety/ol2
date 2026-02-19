@@ -14,7 +14,6 @@
 
 """Utility to use the Closure Compiler CLI from Python."""
 
-import distutils.version
 import logging
 import re
 import subprocess
@@ -46,13 +45,6 @@ def Compile(compiler_jar_path, source_paths, flags=None):
   Returns:
     The compiled source, as a string, or None if compilation failed.
   """
-
-  # User friendly version check.
-  if not (distutils.version.LooseVersion(_GetJavaVersion()) >=
-          distutils.version.LooseVersion('1.6')):
-    logging.error('Closure Compiler requires Java 1.6 or higher. '
-                  'Please visit http://www.java.com/getjava')
-    return
 
   args = [JAVA_PATH, '-jar', compiler_jar_path]
   for path in source_paths:
